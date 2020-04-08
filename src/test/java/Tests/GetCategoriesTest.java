@@ -1,13 +1,13 @@
+package Tests;
+
 import io.restassured.response.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 public class GetCategoriesTest extends BaseTest {
-
+    String categoriesURI = "/api/v2.1/categories";
 
     /*
     Test to verify if category count is 13
@@ -16,13 +16,11 @@ public class GetCategoriesTest extends BaseTest {
 
     public void verifyCategoriesCount() {
 
-        Response response = httpRequest.get("/api/v2.1/categories");
+        Response response = httpRequest.get(categoriesURI);
         Assert.assertEquals(200, response.getStatusCode());
         JSONObject responseJSONObject = new JSONObject(response.getBody().asString());
-        JSONArray jsonArray1 = responseJSONObject.getJSONArray("categories");
-        System.out.println(jsonArray1.length());
-
-
+        JSONArray jsonArray = responseJSONObject.getJSONArray("categories");
+        Assert.assertEquals(13, jsonArray.length());
     }
 
     /*
@@ -32,15 +30,15 @@ public class GetCategoriesTest extends BaseTest {
 
     public void verifyRequiredCategoryIsSeen() {
 
-        Response response = httpRequest.get("/api/v2.1/categories");
+        Response response = httpRequest.get(categoriesURI);
         Assert.assertEquals(200, response.getStatusCode());
         JSONObject responseJSONObject = new JSONObject(response.getBody().asString());
-        JSONArray jsonArray1 = responseJSONObject.getJSONArray("categories");
-        Assert.assertTrue(jsonArray1.toString().contains("Delivery"));
+        JSONArray jsonArray = responseJSONObject.getJSONArray("categories");
+        Assert.assertTrue(jsonArray.toString().contains("Delivery"));
 
     }
 
-
+    //TODO : Add more tests around location details
     @Test
     public void veerifyLocationDetails() {
 //        Response response=httpRequest.get("")
