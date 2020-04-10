@@ -15,8 +15,7 @@ public class GetCategoriesTest extends BaseTest {
     @Test()
 
     public void verifyCategoriesCount() {
-
-        Response response = httpRequest.get(categoriesURI);
+        Response response=requestBuilder.getRequestResponse(httpRequest,categoriesURI);
         Assert.assertEquals(200, response.getStatusCode());
         JSONObject responseJSONObject = new JSONObject(response.getBody().asString());
         JSONArray jsonArray = responseJSONObject.getJSONArray("categories");
@@ -30,7 +29,7 @@ public class GetCategoriesTest extends BaseTest {
 
     public void verifyRequiredCategoryIsSeen() {
 
-        Response response = httpRequest.get(categoriesURI);
+        Response response = requestBuilder.getRequestResponse(httpRequest,categoriesURI);
         Assert.assertEquals(200, response.getStatusCode());
         JSONObject responseJSONObject = new JSONObject(response.getBody().asString());
         JSONArray jsonArray = responseJSONObject.getJSONArray("categories");

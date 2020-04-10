@@ -14,7 +14,7 @@ public class GetCitiesTest extends BaseTest {
      */
     @Test
     public void verifyCities() {
-        Response response = httpRequest.get(citiesURI);
+        Response response=requestBuilder.getRequestResponse(httpRequest,citiesURI);
         List<String> respin = response.jsonPath().getList("location_suggestions");
         System.out.println(respin.size());
         Assert.assertEquals(200, response.getStatusCode());
