@@ -1,10 +1,11 @@
 package Tests;
 
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class GetCategoriesTest extends BaseTest {
     String categoriesURI = "/api/v2.1/categories";
@@ -15,11 +16,11 @@ public class GetCategoriesTest extends BaseTest {
     @Test()
 
     public void verifyCategoriesCount() {
-        Response response=requestBuilder.getRequestResponse(httpRequest,categoriesURI);
+        Response response = requestBuilder.getRequestResponse(httpRequest, categoriesURI);
         Assert.assertEquals(200, response.getStatusCode());
-        JSONObject responseJSONObject = new JSONObject(response.getBody().asString());
-        JSONArray jsonArray = responseJSONObject.getJSONArray("categories");
-        Assert.assertEquals(13, jsonArray.length());
+        JsonPath jsonPath = response.jsonPath();
+        List<String> categoryNames = jsonPath.getList("categories.categories");
+        Assert.assertEquals(13, categoryNames.size());
     }
 
     /*
@@ -29,11 +30,12 @@ public class GetCategoriesTest extends BaseTest {
 
     public void verifyRequiredCategoryIsSeen() {
 
-        Response response = requestBuilder.getRequestResponse(httpRequest,categoriesURI);
+        Response response = requestBuilder.getRequestResponse(httpRequest, categoriesURI);
         Assert.assertEquals(200, response.getStatusCode());
-        JSONObject responseJSONObject = new JSONObject(response.getBody().asString());
-        JSONArray jsonArray = responseJSONObject.getJSONArray("categories");
-        Assert.assertTrue(jsonArray.toString().contains("Delivery"));
+        JsonPath jsonPath = response.jsonPath();
+        List<String> categoryNames = jsonPath.getList("categories.categories.name");
+        System.out.println(categoryNames);
+        Assert.assertTrue(categoryNames.contains("Delivery"));
 
     }
 
