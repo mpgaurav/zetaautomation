@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Zomato API Tests]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="Zomato API tests(failed)" verbose="0">
+    <classes>
+      <class name="Tests.GetCategoriesTest">
+        <methods>
+          <include name="verifyRequiredCategoryIsSeen"/>
+          <include name="beforeTest"/>
+          <include name="veerifyLocationDetails"/>
+          <include name="verifyCategoriesCount"/>
+          <include name="cleanUp"/>
+          <include name="testSetup"/>
+          <include name="print"/>
+        </methods>
+      </class> <!-- Tests.GetCategoriesTest -->
+      <class name="Tests.GetCitiesTest">
+        <methods>
+          <include name="beforeTest"/>
+          <include name="verifyCities"/>
+          <include name="cleanUp"/>
+          <include name="testSetup"/>
+          <include name="print"/>
+        </methods>
+      </class> <!-- Tests.GetCitiesTest -->
+      <class name="Tests.GetCuisinesTest">
+        <methods>
+          <include name="voidTest2"/>
+          <include name="beforeTest"/>
+          <include name="verifyCuisinesInACityTest"/>
+          <include name="cleanUp"/>
+          <include name="testSetup"/>
+          <include name="print"/>
+        </methods>
+      </class> <!-- Tests.GetCuisinesTest -->
+    </classes>
+  </test> <!-- Zomato API tests(failed) -->
+</suite> <!-- Failed suite [Zomato API Tests] -->
